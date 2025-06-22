@@ -1,0 +1,172 @@
+﻿<UserControl x:Class="Registers.UserControls.PropertiesPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Registers.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Border
+            Background="Black"
+            Margin="5 5 0 0"
+            Height="302"
+            Width="352"/>
+
+        <Border
+            Background="LightGray"
+            BorderBrush="DarkGray"
+            BorderThickness="3"
+            Height="300"
+            Width="350"/>
+
+        <Border
+            Background="White"
+            BorderBrush="DarkGray"
+            Margin="0 -260 0 0"
+            BorderThickness="3"
+            Height="40"
+            Width="350"/>
+
+        <TextBlock
+            Text="Properties"
+            Foreground="Black"
+            Margin="-220 -260 0 0"
+            FontSize="20"
+            FontFamily="Segoe UI Black"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            FontWeight="Bold"/>
+
+        <Button
+            Content="X"
+            Foreground="White"
+            Background="IndianRed"
+            BorderBrush="Transparent"
+            FontFamily="Arial Rounded MT Bold"
+            FontSize="14"
+            Command="{Binding ClosePropertiesCommand}"
+            HorizontalAlignment="Center"
+            HorizontalContentAlignment="Center"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Width="20"
+            Height="20"
+            Margin="300,-257,0,0"/>
+
+        <Grid
+            Width="344"
+            Height="256"
+            Margin="0 38 0 0">
+
+            <Grid Margin="15 10 ">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>   
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Text="Project Name"/>
+                <TextBlock
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Text="{Binding ProjectInfo.ProjectName}"
+                    Margin="5 0 0 0"/>
+
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Margin="0 5 0 0"
+                    Text="File Path"/>
+                <ScrollViewer 
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    Margin="5 5 0 0"
+                    VerticalAlignment="Top"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Disabled">
+                    <TextBlock 
+                        Text="{Binding ProjectInfo.FilePath}"
+                        TextWrapping="NoWrap"/>
+                </ScrollViewer>
+
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Margin="0 5 0 0"
+                    Text="Description"/>
+                <TextBox
+                    Grid.Column="2"
+                    Height="85"
+                    TextWrapping="Wrap"
+                    ScrollViewer.CanContentScroll="true"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    Margin="5 5 0 0"
+                    Text="{Binding ProjectInfo.ProjectDescription}"
+                    Grid.Row="2"/>
+
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="3"
+                    Margin="0 5 0 0"
+                    Text="Author"/>
+                <TextBox
+                    Grid.Column="2"
+                    Grid.Row="3"
+                    Text="{Binding ProjectInfo.Author, Mode=TwoWay}"
+                    Margin="5 5 0 0"
+                    />
+
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="4"
+                    Margin="0 5 0 0"
+                    Text="Created"/>
+                <TextBlock
+                    Grid.Column="2"
+                    Grid.Row="4"
+                    Text="{Binding ProjectInfo.Created}"
+                    Margin="5 5 0 0"/>
+                
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="5"
+                    Margin="0 5 0 0"
+                    Text="Last Saved"/>
+                <TextBlock
+                    Grid.Column="2"
+                    Grid.Row="5"
+                    Text="{Binding ProjectInfo.LastModified}"
+                    Margin="5 5 0 0"/>
+
+                <TextBlock
+                    Grid.Column="0"
+                    Grid.Row="6"
+                    Margin="0 5 0 0"
+                    Text="Size"/>
+                <TextBlock
+                    Grid.Column="2"
+                    Grid.Row="6"
+                    Text="{Binding FileSize}"
+                    Margin="5 5 0 0"/>
+
+            </Grid>
+                
+        </Grid>
+
+    </Grid>
+
+</UserControl>

@@ -68,4 +68,14 @@ namespace Registers.Classes
 
         public string ProjectFilePath { get; private set; }
     }
+
+    public class PropertiesVisibilityMessage : MvxMessage
+    {
+        public PropertiesVisibilityMessage(object sender, bool isVisible)
+            : base(sender)
+        {
+            IsVisible = isVisible;
+        }
+        public bool IsVisible { get; private set; }
+    }
 }

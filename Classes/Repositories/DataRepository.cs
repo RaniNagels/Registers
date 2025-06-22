@@ -129,6 +129,12 @@ namespace Registers.Classes.Repositories
             return RegistersData.ProjectInfo;
         }
 
+        public void SetProjectInfo(ProjectInfo projectInfo)
+        {
+            RegistersData.ProjectInfo = projectInfo;
+            ChangesMade = true;
+        }
+
         public T? Get<T>(Guid id) where T : class
         {
             if (typeof(T) == typeof(Certificate))

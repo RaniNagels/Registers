@@ -50,6 +50,10 @@ namespace Registers.ViewModels
         private System.Windows.Controls.UserControl _startUpPage = new System.Windows.Controls.UserControl();
         private StartupViewModel _startUpVM;
 
+        [ObservableProperty]
+        private System.Windows.Controls.UserControl _propertiesPage = new System.Windows.Controls.UserControl();
+        private PropertiesViewModel _propertiesVM;
+
         private JsonRepository<ConfigurationSettings> _configSettings;
 
         //-------------------------------------------------------------
@@ -83,6 +87,20 @@ namespace Registers.ViewModels
             LoadInAllData();
         }
 
+        //-------------------------------------------------------------
+        // properties information
+        private MvxSubscriptionToken _propertiesToken;
+        private IMvxMessenger _propertiesMessenger;
+        [ObservableProperty] private Visibility _propertiesPanelVisibility = Visibility.Collapsed;
+
+        private void OnPropertiesVisibilityMessageReceived(PropertiesVisibilityMessage message)
+        {
+            PropertiesPage.Visibility = message.IsVisible ? Visibility.Visible : Visibility.Collapsed;
+            PropertiesPanelVisibility = message.IsVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        //-------------------------------------------------------------
+        // window title
         [ObservableProperty] private string _windowTitle = "Registers - Stamboom Application";
 
         //-------------------------------------------------------------
@@ -102,6 +120,12 @@ namespace Registers.ViewModels
 
             _countryVM = new CountryViewModel(_panelMessenger);
             CountryDetail = new CountryPanel { DataContext = _countryVM };
+
+            _propertiesMessenger = ServiceLocator.Messenger;
+            _propertiesToken = _propertiesMessenger.Subscribe<PropertiesVisibilityMessage>(OnPropertiesVisibilityMessageReceived);
+
+            _propertiesVM = new PropertiesViewModel(_propertiesMessenger);
+            PropertiesPage = new PropertiesPage { DataContext = _propertiesVM };
         }
 
         [RelayCommand]
@@ -262,6 +286,13 @@ namespace Registers.ViewModels
             {
                 WindowTitle = "Registers - Stamboom Application";
             }
+        }
+
+        [RelayCommand]
+        private void ShowProperties()
+        {
+            PropertiesPage.Visibility = Visibility.Visible;
+            PropertiesPanelVisibility = Visibility.Visible;
         }
     }
 }
