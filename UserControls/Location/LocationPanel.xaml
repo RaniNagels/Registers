@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Registers.UserControls.LocationPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Registers.UserControls"
+             xmlns:userControls="clr-namespace:Registers.UserControls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:vm="clr-namespace:Registers.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" 
+             d:DesignWidth="300">
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="LocationTemplate">
+            <TextBlock
+                HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock 
+                        Grid.Column="0" 
+                        HorizontalAlignment="Stretch"
+                        Text="{Binding City}"/>
+                    <TextBlock
+                        Grid.Column="1" 
+                        HorizontalAlignment="Stretch"
+                        Text="{Binding CountryId, Converter={StaticResource CountryIdToStringConv}}"/>
+                </Grid>
+                <TextBlock.InputBindings>
+                    <MouseBinding 
+                        MouseAction="LeftDoubleClick"
+                        Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        CommandParameter="{Binding .}" />
+                </TextBlock.InputBindings>
+            </TextBlock>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <userControls:DataPanel
+            SearchText="{Binding SearchText, Mode=OneWayToSource}"
+            MatchAllWords="{Binding MatchAllWords, Mode=OneWayToSource}"
+            SourceItems="{Binding FilteredItems}"
+            ItemTemplate="{StaticResource LocationTemplate}"
+            />
+    </Grid>
+</UserControl>

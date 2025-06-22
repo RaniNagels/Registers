@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="Registers.UserControls.CertificatePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Registers.UserControls"
+             xmlns:userControls="clr-namespace:Registers.UserControls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:vm="clr-namespace:Registers.ViewModels"
+             xmlns:classes="clr-namespace:Registers.Classes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" 
+             d:DesignWidth="300">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="CertificateTemplate">
+            <TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Type}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Location, Converter={StaticResource LocationIdToStringConv}}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding CertificateNumber}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Date, StringFormat='{}{0:dd MMMM yyyy}'}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding URL}" 
+                               Visibility="{Binding URL, Converter={StaticResource IsVisibleConv}}" 
+                               Grid.ColumnSpan="2"/>
+                    
+                </Grid>
+                <TextBlock.InputBindings>
+                    <MouseBinding 
+                        MouseAction="LeftDoubleClick"
+                        Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        CommandParameter="{Binding .}" />
+                </TextBlock.InputBindings>
+            </TextBlock>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <userControls:DataPanel
+            Grid.Row="1"
+            Title="Certificates"
+            TitleVisibility="Visible"
+            SearchText="{Binding SearchText, Mode=OneWayToSource}"
+            MatchAllWords="{Binding MatchAllWords, Mode=OneWayToSource}"
+            SourceItems="{Binding FilteredItems}"
+            ItemTemplate="{StaticResource CertificateTemplate}"
+            ButtonCommand="{Binding AddNewItemCommand}"
+            ButtonVisibility="Visible"
+            />
+    </Grid>
+</UserControl>

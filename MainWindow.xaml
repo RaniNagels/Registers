@@ -1,0 +1,180 @@
+﻿<Window Style="{DynamicResource WindowStyle}" x:Class="Registers.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:Registers"
+        xmlns:userControls="clr-namespace:Registers.UserControls"
+        xmlns:vm="clr-namespace:Registers.ViewModels"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle}" 
+        Height="650" 
+        Width="1000">
+
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding StartApplicationCommand}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding SaveCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Window.Resources>
+        <DataTemplate x:Key="CertificateTemplate">
+            <TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Type}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Id}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Location}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Date}"/>
+                </Grid>
+                <TextBlock.InputBindings>
+                    <MouseBinding 
+                        MouseAction="LeftDoubleClick"
+                        Command="{Binding DataContext.EditCertificateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        CommandParameter="{Binding .}" />
+                </TextBlock.InputBindings>
+            </TextBlock>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu 
+            Height="20">
+            <MenuItem Header="File">
+                <MenuItem Header="New"
+                          Command="{Binding CreateNewFileCommand}"/>
+                <MenuItem Header="Open..."
+                          Command="{Binding OpenFileCommand}"/>
+                <MenuItem Header="Save"
+                          Command="{Binding SaveCommand}"/>
+                <MenuItem Header="Save As..."
+                          Command="{Binding SaveAsCommand}"/>
+                <MenuItem Header="Exit"
+                          Command="{Binding CloseCommand}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+                <Separator/>
+                <MenuItem Header="Properties"/>
+            </MenuItem>
+            <MenuItem Header="Data">
+                <MenuItem Header="Remove All Unreferenced Data">
+                    <MenuItem Header="Locations"/>
+                    <MenuItem Header="Countries"/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Show Data Panel">
+                    <MenuItem 
+                        Header="Locations"
+                        Command="{Binding SwitchLocationPanelVisibilityCommand}" 
+                        Icon="{Binding LocationPanelVisibility, Converter={StaticResource VisibilityToIconConv}}"/>
+                    <MenuItem 
+                        Header="Countries"
+                        Command="{Binding SwitchCountryPanelVisibilityCommand}"
+                        Icon="{Binding CountryPanelVisibility, Converter={StaticResource VisibilityToIconConv}}"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="250" Width="3*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition MinWidth="300" Width="4*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition MinWidth="250" Width="3*" />
+            </Grid.ColumnDefinitions>
+
+
+            <!-- Left Panel: Certificates -->
+            <Grid
+                Background="LightGray"
+                Grid.Column="0">
+                <ContentControl
+                    Content="{Binding CertificateDetail}"/>
+
+            </Grid>
+
+            <!-- Splitter -->
+            <GridSplitter 
+                Grid.Column="1" 
+                Width="4" 
+                HorizontalAlignment="Stretch" 
+                Background="LightGray"/>
+
+            <!-- Middle Panel: Details -->
+            <ContentControl 
+                Grid.Column="2" 
+                Content="{Binding SelectedDetail}" />
+
+            <!-- Splitter -->
+            <GridSplitter 
+                Grid.Column="3" 
+                Width="4" 
+                HorizontalAlignment="Stretch" 
+                Background="LightGray"/>
+
+            <Grid
+                Background="LightGray"
+                Grid.Column="4">
+
+                <TabControl
+                    Grid.Row="1"
+                    SelectedIndex="{Binding SelectedTabIndex}"
+                    Visibility="{Binding RightPanelInUse}"
+                    Margin="0 5 0 0">
+                    <TabItem 
+                        Header="Locations"
+                        Visibility="{Binding LocationPanelVisibility}">
+                        <ContentControl
+                            Visibility="{Binding LocationPanelVisibility}"
+                            Content="{Binding LocationDetail}"/>
+                    </TabItem>
+                    <TabItem 
+                        Header="Countries"
+                        Visibility="{Binding CountryPanelVisibility}">
+                        <ContentControl
+                            Visibility="{Binding CountryPanelVisibility}"
+                            Content="{Binding CountryDetail}"/>
+                    </TabItem>
+                </TabControl>
+                <!-- Right Panel: People -->
+
+            </Grid>
+        </Grid>
+
+        <UserControl
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="5"
+            Margin="0 0 0 5"
+            Background="#99FFFFFF"
+            Visibility="{Binding StartUpPage.Visibility}"
+            Content="{Binding StartUpPage}"/>
+
+    </Grid>
+
+
+</Window>

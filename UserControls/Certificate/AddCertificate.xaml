@@ -1,0 +1,169 @@
+﻿<UserControl x:Class="Registers.UserControls.AddCertificate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:dnp="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
+             xmlns:local="clr-namespace:Registers.UserControls"
+             xmlns:vm="clr-namespace:Registers.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" 
+             d:DesignWidth="400">
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock 
+                Grid.Column="0" 
+                Text="{Binding PanelName}" 
+                FontSize="20" 
+                FontFamily="Segoe UI Black" 
+                VerticalAlignment="Center"
+                FontWeight="Bold" 
+                Margin="0 0 15 0"/>
+            <ComboBox 
+                ItemsSource="{Binding CertificateTypes}"
+                SelectedItem="{Binding CType, Mode=TwoWay}" 
+                Grid.Column="1"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                FontFamily="Segoe UI Black" 
+                MinWidth="100" 
+                Margin="0 0 0 5"
+                SelectedIndex="0" 
+                FontSize="20"/>
+        </Grid>
+
+        <Separator Grid.Row="1"
+            VerticalAlignment="Top"/>
+        
+        <Grid
+            Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+
+            <TextBlock 
+                Grid.Column="0"
+                Grid.Row="0"
+                Margin="0 15 0 0"
+                Text="Date of Certificate:" 
+                Width="150" 
+                VerticalAlignment="Center"/>
+            <xctk:DateTimePicker
+                Grid.Column="1"
+                Grid.Row="0"
+                Margin="0 15 0 0"
+                Format="Custom"
+                FormatString="d, MMMM, yyyy   HH:mm"
+                Value="{Binding CDate, Mode=TwoWay}"
+                HorizontalAlignment="Stretch"
+                Loaded="DateTimePicker_Loaded"
+                Width="Auto"/>
+                
+                <!--SelectedDate="{Binding CDate, Mode=TwoWay}"-->
+
+
+            <TextBlock 
+                Grid.Column="0"
+                Grid.Row="1"
+                Margin="0 5 0 0"
+                Text="Place of Certificate:" 
+                Width="150" 
+                VerticalAlignment="Center"/>
+            <dnp:AutoCompleteBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0 5 0 0"
+                HorizontalAlignment="Stretch"
+                FilterMode="Contains"
+                ItemsSource="{Binding Locations}"
+                Text="{Binding LocationInput, Mode=TwoWay}"
+                />
+
+
+
+            <TextBlock 
+                Grid.Column="0"
+                Grid.Row="2"
+                Margin="0 5 0 0"
+                Text="Certificate Number:" 
+                Width="150" 
+                VerticalAlignment="Center"/>
+            <TextBox 
+                Grid.Column="1"
+                Grid.Row="2"
+                Margin="0 5 0 0"
+                HorizontalAlignment="Stretch"
+                Text="{Binding CNumber, Mode=TwoWay}" />
+
+
+            <TextBlock 
+                Grid.Column="0"
+                Grid.Row="3"
+                Margin="0 5 0 0"
+                Text="URL:" 
+                Width="150" 
+                VerticalAlignment="Center"/>
+            <TextBox 
+                Grid.Column="1"
+                Grid.Row="3"
+                Margin="0 5 0 0"
+                HorizontalAlignment="Stretch"
+                Text="{Binding CUrl, Mode=TwoWay}" />
+        </Grid>
+
+        <StackPanel 
+            Grid.Row="3"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right">
+
+            <Button
+                Grid.Row="2"
+                Content="Remove"
+                Margin="0 0 50 0"
+                Background="#FFE2AFAF"
+                Visibility="{Binding Visibility}"
+                Command="{Binding RemoveCommand}"
+                Width="80"/>
+
+            <Button
+                Grid.Row="2"
+                Content="Cancel"
+                Margin="0 0 10 0"
+                Background="White"
+                Command="{Binding CancelCommand}"
+                Width="80"/>
+
+            <Button 
+                Grid.Row="2"
+                Content="{Binding ButtonName}"
+                Width="80"
+                Command="{Binding SaveCommand}" />
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>
