@@ -124,7 +124,7 @@ namespace Registers.ViewModels
         [RelayCommand]
         public void Save()
         {
-            if (StartUpPage.Visibility == Visibility.Collapsed)
+            if (StartUpPage.Visibility == Visibility.Collapsed && GetRepository().ChangesMade)
             {
                 var result = System.Windows.MessageBox.Show(
                     "Do you wish to Save?",

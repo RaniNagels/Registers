@@ -20,7 +20,7 @@ namespace Registers.ViewModels
     public partial class CertificateFormViewModel : FormViewModel<Certificate>
     {
         [ObservableProperty] private CertificateType _cType;
-        [ObservableProperty] private DateTime _cDate;
+        [ObservableProperty] private DateTime _cDate = DateTime.Now;
         [ObservableProperty] private string? _cUrl;
         [ObservableProperty] private int _cNumber;
 

@@ -77,7 +77,7 @@
                 Grid.Row="0"
                 Margin="0 15 0 0"
                 Format="Custom"
-                FormatString="d, MMMM, yyyy   HH:mm"
+                FormatString="d MMMM yyyy   HH:mm"
                 Value="{Binding CDate, Mode=TwoWay}"
                 HorizontalAlignment="Stretch"
                 Loaded="DateTimePicker_Loaded"

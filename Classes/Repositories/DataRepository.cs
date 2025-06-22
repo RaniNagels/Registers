@@ -23,6 +23,8 @@ namespace Registers.Classes.Repositories
         [ObservableProperty]
         private Data _registersData = new();
 
+        public bool ChangesMade = false;
+
         public void Load()
         {
             if (!File.Exists(_filePath)) return;
@@ -86,16 +88,19 @@ namespace Registers.Classes.Repositories
 
         public void Add<T>(T item) where T : IdItem
         {
+            ChangesMade = true;
             RegistersData.AddItem(item);
         }
 
         public void Remove<T>(T item) where T : IdItem
         {
+            ChangesMade = true;
             RegistersData.RemoveItem(item);
         }
 
         public void Update<T>(T item) where T : IdItem
         {
+            ChangesMade = true;
             RegistersData.UpdateItem(item);
         }
 
