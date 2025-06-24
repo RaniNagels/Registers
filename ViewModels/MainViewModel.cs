@@ -33,6 +33,8 @@ namespace Registers.ViewModels
 
         private CertificateViewModel _certifVM;
 
+        [ObservableProperty] private Visibility _peoplePanelVisibility = Visibility.Visible;
+
         [ObservableProperty]
         private System.Windows.Controls.UserControl _locationDetail = new System.Windows.Controls.UserControl();
         [ObservableProperty] private Visibility _locationPanelVisibility = Visibility.Visible;
@@ -178,7 +180,7 @@ namespace Registers.ViewModels
             UpdateRightPanelVisibility();
             if (CountryPanelVisibility == Visibility.Visible)
             {
-                SelectedTabIndex = 1;
+                SelectedTabIndex = 2;
             }
         }
 
@@ -189,6 +191,17 @@ namespace Registers.ViewModels
             UpdateRightPanelVisibility();
             if (LocationPanelVisibility == Visibility.Visible)
             {
+                SelectedTabIndex = 1;
+            }
+        }
+
+        [RelayCommand]
+        private void SwitchPeoplePanelVisibility()
+        {
+            PeoplePanelVisibility = PeoplePanelVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            UpdateRightPanelVisibility();
+            if (PeoplePanelVisibility == Visibility.Visible)
+            {
                 SelectedTabIndex = 0;
             }
         }
@@ -196,6 +209,7 @@ namespace Registers.ViewModels
         private bool AreAllPanelsInvisible()
         {
             return LocationPanelVisibility == Visibility.Collapsed &&
+                   PeoplePanelVisibility == Visibility.Collapsed &&
                    CountryPanelVisibility == Visibility.Collapsed;
         }
 

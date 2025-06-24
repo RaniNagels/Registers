@@ -29,7 +29,6 @@ namespace Registers.ViewModels
 
         [ObservableProperty] private TimedOccupation? _occupation;
         [ObservableProperty] private TimedLocation? _currentResidence;
-        [ObservableProperty] private Gender? _gender;
         [ObservableProperty] private int _age;
 
         [ObservableProperty] private TimedLocation? _placeOfBirth;

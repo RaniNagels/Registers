@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Registers.UserControls
+namespace Registers.UserControls.People
 {
     /// <summary>
     /// Interaction logic for AddPerson.xaml
     /// </summary>
-    public partial class AddPerson : System.Windows.Controls.UserControl
+    public partial class EditPerson : System.Windows.Controls.UserControl
     {
-        public AddPerson()
+        public EditPerson()
         {
             InitializeComponent();
         }

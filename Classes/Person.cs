@@ -11,13 +11,10 @@ namespace Registers.Classes
         public string? FirstName { get; set; }
 
         [JsonProperty("middle_names")]
-        public string? MiddleNames { get; set; }
+        public List<string>? MiddleNames { get; set; }
 
         [JsonProperty("last_name")]
         public string? LastName { get; set; }
-
-        [JsonProperty("gender")]
-        public Gender Gender { get; set; }
 
 
         [JsonProperty("birth_date")]
@@ -54,12 +51,5 @@ namespace Registers.Classes
         {
 
         }
-    }
-
-    public enum Gender
-    {
-        Male,
-        Female,
-        Other
     }
 }

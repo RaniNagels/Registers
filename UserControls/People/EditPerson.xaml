@@ -1,0 +1,642 @@
+﻿<UserControl x:Class="Registers.UserControls.People.EditPerson"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:Registers.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="850"
+             d:DesignWidth="400">
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock 
+            Grid.Row="0"
+            Text="Catharina Maria Victoria Tuyaerts" 
+            FontSize="20" 
+            FontFamily="Segoe UI Black" 
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            FontWeight="Bold" 
+            Margin="2 0 15 0"/>
+
+        <Separator
+            Grid.Row="0"
+            VerticalAlignment="Bottom"/>
+
+        <ScrollViewer
+            Grid.Row="1"
+            HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+                <!-- NAME -->
+                <GroupBox 
+                    Background="WhiteSmoke">
+                <GroupBox.Header>
+                    <TextBlock 
+                        Foreground="DarkGray"
+                        Text="Name"/>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Margin="0 5 0 0"
+                        Text="First Name"
+                        Foreground="DimGray"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"/>
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        Margin="0 5 0 0"
+                        Text="Catharina"
+                        HorizontalAlignment="Stretch"
+                        Width="Auto"/>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Margin="0 5 0 0"
+                        Text="Middle Name(s)"
+                        Foreground="DimGray"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"/>
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Margin="0 5 0 0"
+                        Text="Maria (Marie) Victoria"
+                        HorizontalAlignment="Stretch"
+                        Width="Auto"/>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Margin="0 5 0 0"
+                        Text="Last Name"
+                        Foreground="DimGray"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"/>
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        Margin="0 5 0 0"
+                        Text="Tuyaerts (Taeyaerts, Tuyart, Taeyart, Tuyaert, other variations)"
+                        HorizontalAlignment="Stretch"
+                        TextWrapping="Wrap"
+                        Width="Auto"/>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        Margin="0 5 0 0"
+                        Text="Nickname"
+                        Foreground="DimGray"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"/>
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.Row="3"
+                        Margin="0 5 0 0"
+                        Text="Kaat"
+                        HorizontalAlignment="Stretch"
+                        Width="Auto"/>
+                </Grid>
+            </GroupBox>
+
+                <!-- BIRTH -->
+                <GroupBox
+                Background="WhiteSmoke">
+                <GroupBox.Header>
+                    <TextBlock 
+                        Foreground="DarkGray"
+                        Text="Birth"/>
+                </GroupBox.Header>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Margin="0 5 0 0"
+                        Text="Date of Birth"
+                        Foreground="DimGray"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"/>
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        Margin="0 5 0 0"
+                        Text="15 mei 1846   04:00"
+                        HorizontalAlignment="Stretch"
+                        Width="Auto"/>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Margin="0 5 0 0"
+                        Text="Place of Birth"
+                        Foreground="DimGray"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"/>
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Margin="0 5 0 0"
+                        Text="Antwerpen, België"
+                        HorizontalAlignment="Stretch"
+                        Width="Auto"/>
+                </Grid>
+            </GroupBox>
+
+                <!-- DEATH -->
+                <GroupBox
+                Background="WhiteSmoke"
+                Visibility="Visible">
+                <GroupBox.Header>
+                    <TextBlock 
+                        Foreground="DarkGray"
+                        Text="Death"/>
+                </GroupBox.Header>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Margin="0 5 0 0"
+                        Text="Date of Death"
+                        Foreground="DimGray"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"/>
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        Margin="0 5 0 0"
+                        Text="23 september 1916   22:00"
+                        HorizontalAlignment="Stretch"
+                        Width="Auto"/>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Margin="0 5 0 0"
+                        Text="Place of Death"
+                        Foreground="DimGray"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"/>
+                    <TextBlock
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Margin="0 5 0 0"
+                        Text="Rumst, België"
+                        HorizontalAlignment="Stretch"
+                        Width="Auto"/>
+                </Grid>
+            </GroupBox>
+                
+                <!-- SPOUSE -->
+                <GroupBox
+                    Background="WhiteSmoke">
+                    <GroupBox.Header>
+                        <TextBlock 
+                            Foreground="DarkGray"
+                            Text="Spouse(s)"/>
+                    </GroupBox.Header>
+
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock 
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Margin="0 5 0 0"
+                                Text="Spouse"
+                                Foreground="DimGray"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="3"
+                                Grid.Row="0"
+                                Margin="0 5 0 0"
+                                Text="Joannes Van Michelen (1841 - 1863)"/>
+
+                            <TextBlock 
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                Margin="0 5 0 0"
+                                Text="Marriage Date"
+                                Foreground="DimGray"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="3"
+                                Grid.Row="1"
+                                Margin="0 5 0 0"
+                                Text="19 februari 1863"/>
+
+                            <TextBlock 
+                                Grid.Column="0"
+                                Grid.Row="2"
+                                Margin="0 5 0 0"
+                                Text="Marriage Place"
+                                Foreground="DimGray"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="3"
+                                Grid.Row="2"
+                                Margin="0 5 0 0"
+                                Text="Antwerpen, België"/>
+
+                        </Grid>
+
+                        <Separator
+                            Margin="10 7 10 0"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock 
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Margin="0 5 0 0"
+                                Text="Spouse"
+                                Foreground="DimGray"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="3"
+                                Grid.Row="0"
+                                Margin="0 5 0 0"
+                                Text="Petrus Jacobs ( ? - 1924)"/>
+
+                            <TextBlock 
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                Margin="0 5 0 0"
+                                Text="Marriage Date"
+                                Foreground="DimGray"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="3"
+                                Grid.Row="1"
+                                Margin="0 5 0 0"
+                                Text="27 april 1864"/>
+
+                            <TextBlock 
+                                Grid.Column="0"
+                                Grid.Row="2"
+                                Margin="0 5 0 0"
+                                Text="Marriage Place"
+                                Foreground="DimGray"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"/>
+                            <TextBlock
+                                Grid.Column="3"
+                                Grid.Row="2"
+                                Margin="0 5 0 0"
+                                Text="Rumst, België"/>
+
+                            <TextBlock 
+                                Grid.Column="0"
+                                Grid.Row="3"
+                                Margin="0 5 0 0"
+                                Text="Children"
+                                Foreground="DimGray"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"/>
+                            <ListView
+                                Grid.Column="3"
+                                Grid.Row="3"
+                                Background="Transparent"
+                                BorderBrush="Transparent">
+                                <ListViewItem Content="Maria Jacobs (1865 - 1940)"/>
+                                <ListViewItem Content="Anna Jacobs (1867 - ?)"/>
+                                <ListViewItem Content="Petrus Jacobs (1869 - 1936)"/>
+                            </ListView>
+
+                        </Grid>
+                    </StackPanel>
+                    
+                </GroupBox>
+
+                <!-- FAMILY -->
+                <GroupBox
+                    Background="WhiteSmoke">
+                    <GroupBox.Header>
+                        <TextBlock 
+                            Foreground="DarkGray"
+                            Text="Family"/>
+                    </GroupBox.Header>
+
+                    <StackPanel>
+                        <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock 
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Margin="0 5 0 0"
+                            Text="Father"
+                            Foreground="DimGray"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"/>
+                        <TextBlock
+                            Grid.Column="2"
+                            Grid.Row="0"
+                            Margin="0 5 0 0"
+                            Text="Henricus Taeyaerts (1821 - ?)"
+                            HorizontalAlignment="Stretch"
+                            Width="Auto"/>
+
+                        <TextBlock 
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            Margin="0 5 0 0"
+                            Text="Mother"
+                            Foreground="DimGray"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"/>
+                        <TextBlock
+                            Grid.Column="2"
+                            Grid.Row="1"
+                            Margin="0 5 0 0"
+                            Text="Elisabeth Van Regenmortel (1820 - 1901)"
+                            HorizontalAlignment="Stretch"
+                            Width="Auto"/>
+
+                    </Grid>
+                        
+                        <Separator
+                            Margin="10 7 10 0"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Margin="0 5 0 0"
+                                Text="Siblings"
+                                Foreground="DimGray"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right"/>
+                            <ListView
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Grid.Column="2"
+                                Margin="-5 0 0 0">
+                                <ListViewItem Content="Elisabeth Taeyaerts (1843 - ?)"/>
+                                <ListViewItem Content="Anna Taeyaerts (1844 - 1924)"/>
+                                <ListViewItem Content="Petrus Taeyaerts (1848 - 1899)"/>
+                                <ListViewItem Content="Maria Taeyaerts (1850 - 1914)"/>
+                            </ListView>
+                        </Grid>
+
+                        <Separator
+                            Margin="10 7 10 0"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock 
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Margin="0 5 0 0"
+                                Text="HalfSiblings"
+                                Foreground="DimGray"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right"/>
+                            <ListView
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Grid.Column="2"
+                                Margin="-5 0 0 0">
+                                <ListViewItem Content="Emanuel Taeyaerts (1840 - ?)"/>
+                            </ListView>
+                        </Grid>
+
+                    </StackPanel>
+                </GroupBox>
+                
+                <!-- MISCELLANEOUS -->
+                <GroupBox
+                Background="WhiteSmoke">
+                <GroupBox.Header>
+                    <TextBlock 
+                        Foreground="DarkGray"
+                        Text="Miscellaneous"/>
+                </GroupBox.Header>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Margin="0 5 0 0"
+                        Text="Occupation(s)"
+                        Foreground="DimGray"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"/>
+                    <ListView
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        Margin="-5 5 0 0"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        HorizontalAlignment="Stretch"
+                        Width="Auto"
+                        ItemsSource="{Binding Occupations}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListViewItem Content="Spinster (7 maart 1863)"/>
+                        <ListViewItem Content="Huisvrouw (27 april 1864)"/>
+                    </ListView>
+
+                    <TextBlock 
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Margin="0 5 0 0"
+                        Text="Recidence(s)"
+                        Foreground="DimGray"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"/>
+                    <ListView
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Margin="-5 5 0 0"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        HorizontalAlignment="Stretch"
+                        Width="Auto"
+                        ItemsSource="{Binding Occupations}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListViewItem Content="Antwerpen, België (15 mei 1846)"/>
+                        <ListViewItem Content="Rumst, België (27 april 1864 - 23 september 1916)"/>
+                    </ListView>
+
+                </Grid>
+            </GroupBox>
+
+                <!-- CERTIFICATES -->
+                <GroupBox
+                    Background="WhiteSmoke">
+                    <GroupBox.Header>
+                        <TextBlock 
+                            Foreground="DarkGray"
+                            Text="Certificates"/>
+                    </GroupBox.Header>
+
+                    <ListView
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Margin="5"
+                        MaxHeight="200">
+                        <ListViewItem Content="[BIRTH] Antwerpen, België (17 mei 1846) - Subject"/>
+                        <ListViewItem Content="[MARRIAGE] Antwerpen, België (19 februari 1863) - Bride"/>
+                        <ListViewItem Content="[MARRIAGE] Rumst, België (27 april 1864) - Bride"/>
+                        <ListViewItem Content="[BIRTH] Rumst, België (5 augustus 1865) - Mother"/>
+                        <ListViewItem Content="[BIRTH] Rumst, België (15 oktober 1867) - Mother"/>
+                        <ListViewItem Content="[DEATH] Antwerpen, België (8 augustus 1868) - Witness"/>
+                        <ListViewItem Content="[BIRTH] Rumst, België (12 maart 1869) - Mother"/>
+                        <ListViewItem Content="[MARRIAGE] Reet, België (2 februari 1888) - Mother of the Bride"/>
+                        <ListViewItem Content="[DEATH] Rumst, België (24 september 1916) - Subject"/>
+                    </ListView>
+                </GroupBox>
+                
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- BUTTONS -->
+        <StackPanel 
+            Grid.Row="50"
+            Margin="0 5 0 0 "
+            Orientation="Horizontal"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right">
+
+            <Button
+                Content="Remove"
+                Margin="0 0 50 0"
+                Background="#FFE2AFAF"
+                IsEnabled="{Binding IsEnabled}"
+                Visibility="{Binding Visibility}"
+                Command="{Binding RemoveCommand}"
+                Width="80"/>
+
+            <Button
+                Content="Cancel"
+                Margin="0 0 10 0"
+                Background="White"
+                Command="{Binding CancelCommand}"
+                Width="80"/>
+
+            <Button 
+                Content="{Binding ButtonName}"
+                Width="80"
+                Command="{Binding SaveCommand}" />
+
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>

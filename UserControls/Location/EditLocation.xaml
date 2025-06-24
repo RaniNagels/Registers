@@ -36,94 +36,105 @@
             Margin="0 0 15 0"/>
         </Grid>
 
-        <Separator Grid.Row="1"
-        VerticalAlignment="Top"/>
+        <Separator Grid.Row="0"
+        VerticalAlignment="Bottom"/>
 
-        <Grid
-        Grid.Row="1">
+        <GroupBox Grid.Row="1"
+                  Margin="0 5">
 
-            <StackPanel>
+            <GroupBox.Header>
+                <TextBlock 
+                    Foreground="DarkGray"
+                    Text="General"/>
+            </GroupBox.Header>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <TextBlock 
-                        Grid.Column="0"
-                        Margin="0 15 0 0"
-                        Text="City: " 
-                        Width="150" 
-                        VerticalAlignment="Center"/>
-                    <TextBox 
-                        Grid.Column="1"
-                        Margin="0 15 0 0"
-                        Text="{Binding CCity, Mode=TwoWay}"
-                        HorizontalAlignment="Stretch"
-                        Width="Auto"/>
-                    
-                </Grid>
+            <Grid>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <TextBlock 
-                        Grid.Column="0"
-                        Margin="0 5 0 0"
-                        Text="Country:" 
-                        Width="150" 
-                        VerticalAlignment="Center"/>
-                    <dnp:AutoCompleteBox
-                        Grid.Column="1"
-                        Margin="0 5 0 0"
-                        HorizontalAlignment="Stretch"
-                        FilterMode="Contains"
-                        ItemsSource="{Binding Countries}"
-                        Text="{Binding CountryInput, Mode=TwoWay}"
-                        />
-                    
-                </Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            </StackPanel>
-        </Grid>
+                <TextBlock 
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Margin="0 5 0 0"
+                    Text="City" 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"/>
+                
+                <TextBox 
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Margin="0 5 0 0"
+                    Text="{Binding CCity, Mode=TwoWay}"
+                    HorizontalAlignment="Stretch"
+                    Width="Auto"/>
 
-        <TextBlock
-            Grid.Row="2"
-            Margin="0 15 0 0"
-            Text="References:"
-            FontWeight="Bold"
-            />
+                
+                <TextBlock 
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Margin="0 5 0 0"
+                    Text="Country" 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"/>
+                
+                <dnp:AutoCompleteBox
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    Margin="0 5 0 5"
+                    HorizontalAlignment="Stretch"
+                    FilterMode="Contains"
+                    ItemsSource="{Binding Countries}"
+                    Text="{Binding CountryInput, Mode=TwoWay}"
+                    />
+                        
 
-        <ListView
-            Grid.Row="4"
-            Margin="0 5 0 0"
-            VerticalAlignment="Top"
-            MinHeight="25"
-            Height="Auto"
-            ItemsSource="{Binding ReferencedCertificates}"
-            SelectedIndex="-1">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </Grid>
+        </GroupBox>
 
-        <TextBlock 
-            Grid.Row="4"
-            Text="No references found"
-            Foreground="Gray"
-            FontStyle="Italic"
-            Margin="5 10 0 0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IsHitTestVisible="False"
-            Visibility="{Binding HasReferences, Converter={StaticResource BoolToVisibleConv}}" />
 
+        <GroupBox 
+            Grid.Row="4">
+            <GroupBox.Header>
+                <TextBlock 
+                    Foreground="DarkGray"
+                    Text="References"/>
+            </GroupBox.Header>
+            <Grid>
+                <ListView
+                    VerticalAlignment="Top"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Height="Auto"
+                    ItemsSource="{Binding ReferencedCertificates}"
+                    SelectedIndex="-1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <TextBlock 
+                    Text="No references found"
+                    Foreground="Gray"
+                    FontStyle="Italic"
+                    Margin="5 5 0 0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    IsHitTestVisible="False"
+                    Visibility="{Binding HasReferences, Converter={StaticResource BoolToVisibleConv}}" />
+            </Grid>
+
+        </GroupBox>
 
         <StackPanel 
             Margin="0 5 0 0"

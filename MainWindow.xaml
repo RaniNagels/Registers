@@ -6,6 +6,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:Registers"
         xmlns:userControls="clr-namespace:Registers.UserControls"
+        xmlns:people="clr-namespace:Registers.UserControls.People"
         xmlns:vm="clr-namespace:Registers.ViewModels"
         mc:Ignorable="d"
         Title="{Binding WindowTitle}" 
@@ -85,6 +86,10 @@
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="Show Data Panel">
+                    <MenuItem
+                        Header="People"
+                        Command="{Binding SwitchPeoplePanelVisibilityCommand}"
+                        Icon="{Binding PeoplePanelVisibility, Converter={StaticResource VisibilityToIconConv}}"/>
                     <MenuItem 
                         Header="Locations"
                         Command="{Binding SwitchLocationPanelVisibilityCommand}" 
@@ -126,6 +131,8 @@
                 Background="LightGray"/>
 
             <!-- Middle Panel: Details -->
+            <people:EditPerson
+                Grid.Column="2"/>
             <ContentControl 
                 Grid.Column="2" 
                 Content="{Binding SelectedDetail}" />
@@ -146,6 +153,11 @@
                     SelectedIndex="{Binding SelectedTabIndex}"
                     Visibility="{Binding RightPanelInUse}"
                     Margin="0 5 0 0">
+                    <TabItem
+                        Header="People"
+                        Visibility="{Binding PeoplePanelVisibility}">
+                        
+                    </TabItem>
                     <TabItem 
                         Header="Locations"
                         Visibility="{Binding LocationPanelVisibility}">
@@ -179,7 +191,7 @@
             Grid.Row="1"
             Grid.ColumnSpan="5"
             Margin="0 0 0 5"
-            Background="#FFDDDDDD"
+            Background="#FFE9E9E9"
             Visibility="{Binding PropertiesPanelVisibility}"
             Content="{Binding PropertiesPage}"/>
 
