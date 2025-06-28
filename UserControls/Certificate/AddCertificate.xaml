@@ -6,11 +6,13 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:dnp="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
              xmlns:local="clr-namespace:Registers.UserControls"
+             xmlns:myTools="clr-namespace:Registers.UserControls.Tools"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:vm="clr-namespace:Registers.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" 
              d:DesignWidth="400">
-    
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -43,7 +45,14 @@
                 MinWidth="100" 
                 Margin="0 0 0 5"
                 SelectedIndex="0" 
-                FontSize="20"/>
+                FontSize="20">
+                
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SwitchTypeCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
         </Grid>
 
         <Separator 
@@ -52,7 +61,8 @@
 
         <GroupBox 
             Margin="0 5"
-            Grid.Row="1" >
+            Grid.Row="1" 
+            Background="WhiteSmoke">
             <GroupBox.Header>
                 <TextBlock 
                     Foreground="DarkGray"
@@ -148,12 +158,317 @@
 
         <GroupBox 
             Margin="0 5"
-            Grid.Row="2" >
+            Grid.Row="2" 
+            Background="WhiteSmoke">
             <GroupBox.Header>
                 <TextBlock 
                     Foreground="DarkGray"
                     Text="People Information"/>
             </GroupBox.Header>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="35"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="5 0"
+                    Text="Add Another Person: "/>
+
+                <ComboBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    SelectedItem="{Binding SelectedRole}"
+                    ItemsSource="{Binding AvailableRoles}"/>
+
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Content="+"
+                    Margin="0 0 5 0"
+                    Width="30"
+                    Height="20"
+                    Command="{Binding AddNewPersonInfoCommand}"/>
+
+                <ListView
+                    x:Name="PeopleListView" 
+                    SizeChanged="MyListView_SizeChanged"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    HorizontalAlignment="Stretch"
+                    Margin="5"
+                    Grid.Row="3"
+                    Grid.ColumnSpan="3"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    VirtualizingStackPanel.ScrollUnit="Pixel"
+                    ItemsSource="{Binding People, Mode=TwoWay}">
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border 
+                                HorizontalAlignment="Stretch"
+                                BorderBrush="LightGray" 
+                                Background="White"
+                                BorderThickness="1"
+                                Margin="0 0 0 3">
+
+                                <Expander
+                                    IsExpanded="False"
+                                    Header="{Binding}"
+                                    HorizontalAlignment="Stretch" 
+                                    HorizontalContentAlignment="Stretch">
+                                    <Expander.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid 
+                                                HorizontalAlignment="Stretch">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{Binding DataContext.HeaderColumnWidth, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource DoubleToPixelGridLengthConv}}" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock 
+                                                    Text="{Binding Role}" 
+                                                    FontWeight="Bold" 
+                                                    VerticalAlignment="Center" 
+                                                    HorizontalAlignment="Stretch"
+                                                    Margin="4,0"
+                                                    Grid.Column="0"/>
+
+                                                <Button
+                                                    Content="✕"
+                                                    Width="20"
+                                                    Height="20"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Right"
+                                                    Grid.Column="1"
+                                                    Command="{Binding DataContext.RemovePersonInfoCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    CommandParameter="{Binding}" />
+                                                
+                                            </Grid>
+                                        </DataTemplate>
+                                    </Expander.HeaderTemplate>
+
+                                    <Grid
+                                         Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Separator
+                                            Grid.ColumnSpan="3"
+                                            VerticalAlignment="Top"
+                                            Margin="-5 -3 -5 5"/>
+
+                                        <TextBlock
+                                            Grid.Row="2"
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Right"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=0}"
+                                            Text="First Name"/>
+                                        <TextBox
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Margin="5 0"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Stretch"
+                                            MinWidth="100"
+                                            MaxWidth="Infinity"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=0}"
+                                            Text="{Binding FirstName}"/>
+
+                                        <TextBlock
+                                            Grid.Row="3"
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Right"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=1}"
+                                            Text="Middle Names"/>
+                                        <TextBox
+                                            Grid.Row="3"
+                                            Grid.Column="1"
+                                            Margin="5 0"
+                                            VerticalAlignment="Center"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=1}"
+                                            Text="{Binding MiddleNames}"/>
+
+                                        <TextBlock
+                                            Grid.Row="4"
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Right"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=2}"
+                                            Text="Last Name"/>
+                                        <TextBox
+                                            Grid.Row="4"
+                                            Grid.Column="1"
+                                            Margin="5 0"
+                                            VerticalAlignment="Center"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=2}"
+                                            Text="{Binding LastName}"/>
+
+
+                                        <TextBlock
+                                            Grid.Row="5"
+                                            Grid.Column="0"
+                                            Margin="0 8 0 0"
+                                            HorizontalAlignment="Right"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=3}"
+                                            Text="Date of Birth"/>
+                                        <xctk:DateTimePicker
+                                            Grid.Row="5"
+                                            Grid.Column="1"
+                                            Margin="5 8 5 0"
+                                            Format="Custom"
+                                            FormatString="d MMMM yyyy   HH:mm"
+                                            Value="{Binding BirthDate, Mode=TwoWay}"
+                                            HorizontalAlignment="Stretch"
+                                            Loaded="DateTimePicker_Loaded"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=3}"
+                                            Width="Auto"/>
+
+                                        <TextBlock
+                                            Grid.Row="6"
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Right"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=4}"
+                                            Text="Birth Place"/>
+                                        <dnp:AutoCompleteBox
+                                            Grid.Row="6"
+                                            Grid.Column="1"
+                                            Margin="5 0"
+                                            HorizontalAlignment="Stretch"
+                                            FilterMode="Contains"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=4}"
+                                            ItemsSource="{Binding DataContext.Locations, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            Text="{Binding BirthLocation, Mode=TwoWay}"
+                                            />
+
+                                        <CheckBox
+                                            Grid.Row="7"
+                                            Grid.Column="1"
+                                            Content="Is Deceased"
+                                            Margin="5 8 5 0"
+                                            IsChecked="{Binding IsDeceased}"
+                                            Visibility="{Binding CheckBoxVisibility}"
+                                            />
+                                        
+                                        <TextBlock
+                                            Grid.Row="8"
+                                            Grid.Column="0"
+                                            Margin="0 8 0 0"
+                                            HorizontalAlignment="Right"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=5}"
+                                            Text="Date of Death"/>
+                                        <xctk:DateTimePicker
+                                            Grid.Row="8"
+                                            Grid.Column="1"
+                                            Margin="5 8 5 0"
+                                            Format="Custom"
+                                            FormatString="d MMMM yyyy   HH:mm"
+                                            Value="{Binding DeathDate, Mode=TwoWay}"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=5}"
+                                            HorizontalAlignment="Stretch"
+                                            Loaded="DateTimePicker_Loaded"
+                                            Width="Auto"/>
+
+
+                                        <TextBlock
+                                            Grid.Row="9"
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Right"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=6}"
+                                            Text="Death Place"/>
+                                        <dnp:AutoCompleteBox
+                                            Grid.Row="9"
+                                            Grid.Column="1"
+                                            Margin="5 0"
+                                            HorizontalAlignment="Stretch"
+                                            FilterMode="Contains"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=6}"
+                                            ItemsSource="{Binding DataContext.Locations, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            Text="{Binding DeathLocation, Mode=TwoWay}"
+                                            />
+
+                                        <TextBlock
+                                            Grid.Row="10"
+                                            Grid.Column="0"
+                                            Margin="0 8 0 0"
+                                            HorizontalAlignment="Right"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=7}"
+                                            Text="Occupation"/>
+                                        <TextBox
+                                            Grid.Row="10"
+                                            Grid.Column="1"
+                                            Margin="5 8 5 0"
+                                            VerticalAlignment="Center"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=7}"
+                                            Text="{Binding Occupation}"/>
+
+                                        <TextBlock
+                                            Grid.Row="11"
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Right"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=8}"
+                                            Text="Residence"/>
+                                        <dnp:AutoCompleteBox
+                                            Grid.Row="11"
+                                            Grid.Column="1"
+                                            Margin="5 0"
+                                            HorizontalAlignment="Stretch"
+                                            FilterMode="Contains"
+                                            Visibility="{Binding VisibleFields, Converter={StaticResource IndexToItemConv}, ConverterParameter=8}"
+                                            ItemsSource="{Binding DataContext.Locations, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            Text="{Binding Residence, Mode=TwoWay}"
+                                            />
+
+                                    </Grid>
+                                </Expander>
+
+                                <Border.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem 
+                                            Header="Show All Attributes"
+                                            Command="{Binding ShowAllAttributesCommand}"/>
+                                    </ContextMenu>
+                                </Border.ContextMenu>
+
+                            </Border>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </GroupBox>
 
         <StackPanel 

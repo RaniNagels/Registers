@@ -15,6 +15,7 @@ namespace Registers.ViewModels
     public partial class PropertiesViewModel : ObservableObject
     {
         [ObservableProperty] private ProjectInfo _projectInfo = new ProjectInfo();
+        private readonly ProjectInfo _originalProjectInfo = new ProjectInfo();
         [ObservableProperty] private string _fileSize = string.Empty;
 
         private readonly IMvxMessenger _messenger;
@@ -23,6 +24,8 @@ namespace Registers.ViewModels
         {
             _messenger = messenger;
             ProjectInfo = DataRepository.Instance.RegistersData.ProjectInfo;
+            _originalProjectInfo.ProjectDescription = ProjectInfo.ProjectDescription;
+            _originalProjectInfo.Author = ProjectInfo.Author;
             FileSize = ProjectFileHandler.GetFileSize(ProjectInfo.FilePath);
             _messenger.Publish(new PropertiesVisibilityMessage(this, false));
         }
@@ -30,7 +33,10 @@ namespace Registers.ViewModels
         [RelayCommand]
         private void CloseProperties()
         {
-            DataRepository.Instance.SetProjectInfo(ProjectInfo);
+            if (ProjectInfo.Author != _originalProjectInfo.Author || ProjectInfo.ProjectDescription != _originalProjectInfo.ProjectDescription)
+            {
+                DataRepository.Instance.SetProjectInfo(ProjectInfo);
+            }
             _messenger.Publish(new PropertiesVisibilityMessage(this, false));
         }
     }

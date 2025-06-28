@@ -131,8 +131,6 @@
                 Background="LightGray"/>
 
             <!-- Middle Panel: Details -->
-            <people:EditPerson
-                Grid.Column="2"/>
             <ContentControl 
                 Grid.Column="2" 
                 Content="{Binding SelectedDetail}" />

@@ -17,6 +17,9 @@ namespace Registers.Classes
         [JsonProperty("certifactes")]
         public List<Certificate> Certificates { get; set; }
 
+        [JsonProperty("people")]
+        public List<Person> People { get; set; }
+
         [JsonProperty("locations")]
         public List<Location> Locations { get; set; }
 
@@ -27,6 +30,7 @@ namespace Registers.Classes
         {
             ProjectInfo = new ProjectInfo();
             Certificates = new List<Certificate>();
+            People = new List<Person>();
             Locations = new List<Location>();
             Countries = new List<Country>();
         }
@@ -34,6 +38,7 @@ namespace Registers.Classes
         public void AddItem<T>(T item) where T : IdItem
         {
             if (item is Certificate cert)       Certificates.Add(cert);
+            else if (item is Person person)     People.Add(person);
             else if (item is Location loc)      Locations.Add(loc);
             else if (item is Country country)   Countries.Add(country);
         }
@@ -41,6 +46,7 @@ namespace Registers.Classes
         public void RemoveItem<T>(T item) where T : IdItem
         {
             if (item is Certificate cert)       Remove(Certificates, cert);
+            else if (item is Person person)     Remove(People, person);
             else if (item is Location loc)      Remove(Locations, loc);
             else if (item is Country country)   Remove(Countries, country);
         }
@@ -55,6 +61,7 @@ namespace Registers.Classes
         public void UpdateItem<T>(T item) where T : IdItem
         {
             if (item is Certificate cert)       Update(Certificates, cert);
+            else if (item is Person person)     Update(People, person);
             else if(item is Location loc)       Update(Locations, loc);
             else if (item is Country country)   Update(Countries, country);
         }
@@ -74,7 +81,7 @@ namespace Registers.Classes
         [JsonProperty("id")]
         public Guid Id { get; set; }
 
-        // mmust be overriden in subclasses
+        // must be overriden in subclasses
         public abstract bool HasReferences();
     }
 }

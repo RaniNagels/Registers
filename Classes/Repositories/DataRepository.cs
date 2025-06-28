@@ -16,9 +16,9 @@ namespace Registers.Classes.Repositories
         private static readonly Lazy<DataRepository> _instance = new(() => new DataRepository());
         public static DataRepository Instance => _instance.Value;
 
-        private DataRepository() {}
+        private DataRepository() { _filePath = ""; }
 
-        private string _filePath = "D:\\02_Home\\Projects\\Stamboom\\App\\Registers\\Registers\\Resources\\Data.json";
+        private string _filePath;
 
         [ObservableProperty]
         private Data _registersData = new();
@@ -110,6 +110,10 @@ namespace Registers.Classes.Repositories
             {
                 return RegistersData.Certificates.Cast<T>();
             }
+            else if (typeof(T) == typeof(Person))
+            {
+                return RegistersData.People.Cast<T>();
+            }
             else if (typeof(T) == typeof(Location))
             {
                 return RegistersData.Locations.Cast<T>();
@@ -140,6 +144,10 @@ namespace Registers.Classes.Repositories
             if (typeof(T) == typeof(Certificate))
             {
                 return RegistersData.Certificates.FirstOrDefault(c => c.Id == id) as T;
+            }
+            else if (typeof(T) == typeof(Person))
+            {
+                return RegistersData.People.FirstOrDefault(p => p.Id == id) as T;
             }
             else if (typeof(T) == typeof(Location))
             {

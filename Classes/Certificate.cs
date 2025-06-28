@@ -16,8 +16,8 @@ namespace Registers.Classes
         [JsonProperty("location")]
         public Guid Location { get; set; }
 
-        //[JsonProperty("connected_persons")]
-        //public List<Guid> ConnectedPersonIds { get; set; } = new List<Guid>();
+        [JsonProperty("certificate_persons")]
+        public List<CertificatePersonInfo> RawPersonsData { get; set; }
 
         [JsonProperty("url")]
         public string? URL { get; set; }

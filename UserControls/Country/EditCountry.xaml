@@ -39,7 +39,8 @@
 
         <GroupBox 
             Grid.Row="1"
-            Margin="0 5">
+            Margin="0 5"
+            Background="WhiteSmoke">
 
             <GroupBox.Header>
                 <TextBlock 
@@ -71,7 +72,8 @@
         </GroupBox>
 
         <GroupBox
-            Grid.Row="4">
+            Grid.Row="4"
+            Background="WhiteSmoke">
             <GroupBox.Header>
                 <TextBlock 
                     Foreground="DarkGray"

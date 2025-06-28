@@ -39,8 +39,10 @@
         <Separator Grid.Row="0"
         VerticalAlignment="Bottom"/>
 
-        <GroupBox Grid.Row="1"
-                  Margin="0 5">
+        <GroupBox 
+            Grid.Row="1"
+            Margin="0 5"
+            Background="WhiteSmoke">
 
             <GroupBox.Header>
                 <TextBlock 
@@ -102,7 +104,8 @@
 
 
         <GroupBox 
-            Grid.Row="4">
+            Grid.Row="4"
+            Background="WhiteSmoke">
             <GroupBox.Header>
                 <TextBlock 
                     Foreground="DarkGray"

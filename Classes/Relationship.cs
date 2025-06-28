@@ -6,21 +6,27 @@ using System.Threading.Tasks;
 
 namespace Registers.Classes
 {
-    public class Relationship
+    public class Relationship : IdItem
     {
-        public Guid Id { get; set; }
-        public Guid FromPersonId { get; set; }
+        public Guid PersonId { get; set; }
         public Guid ToPersonId { get; set; }
         public RelationshipType Type { get; set; }
+
+        public override bool HasReferences()
+        {
+            if (PersonId == Guid.Empty || ToPersonId == Guid.Empty)
+                return false;
+            else return true;
+        }
     }
 
     public enum RelationshipType
     {
         Mother,
         Father,
-        Sister,
-        Brother,
-        Daughter,
-        Son
+        Sibling,
+        HalfSibling,
+        Child,
+        Spouse
     }
 }

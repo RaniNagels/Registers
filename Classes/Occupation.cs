@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Registers.Classes.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Registers.Classes
 {
-    public class Occupation
+    public class Occupation : IdItem
     {
-        public Guid Id { get; set; }
         public string? JobName { get; set; }
 
         public override string ToString()
@@ -20,6 +20,12 @@ namespace Registers.Classes
         {
             this.Id = Guid.NewGuid();
             this.JobName = jobName;
+        }
+
+        public override bool HasReferences()
+        {
+            // see if any person has this occupation
+            throw new NotImplementedException();
         }
     }
 

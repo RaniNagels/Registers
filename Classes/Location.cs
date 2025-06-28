@@ -28,15 +28,13 @@ namespace Registers.Classes
             return $"{City}, {country}";
         }
 
+        public Location(){ }
         public Location(string? city, Guid? countryId)
         {
             this.Id = Guid.NewGuid();
             this.City = city;
             this.CountryId = countryId;
         }
-
-        public Location()
-        { }
 
         public Country? GetCountry()
         {
@@ -59,20 +57,16 @@ namespace Registers.Classes
     public class Country : IdItem
     {
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
-        public Country(string? name)
+        public Country() { Name = ""; }
+        public Country(string name)
         {
             this.Id = Guid.NewGuid();
             this.Name = name;
         }
 
-        public override string ToString()
-        {
-            return Name ?? "Unknown Country";
-        }
-
-        public Country() { }
+        public override string ToString() { return Name; }
 
         public override bool HasReferences()
         {
@@ -93,12 +87,18 @@ namespace Registers.Classes
         }
     }
 
-    public class RawGeoData
+    public class MarriageInfo
     {
-        [JsonProperty("countries")]
-        public List<Country> Countries { get; set; } = new();
+        public DateTime? Date { get; set; }
+        public DateTime? EndDate { get; set; }
+        public Guid? Location { get; set; }
+        public Guid SpouseIds { get; set; }
 
-        [JsonProperty("locations")]
-        public List<Location> Locations { get; set; } = new();
+        public MarriageInfo(DateTime? date, Guid? locationId, Guid spouseId)
+        {
+            this.Date = date;
+            this.Location = locationId;
+            this.SpouseIds = spouseId;
+        }
     }
 }

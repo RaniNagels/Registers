@@ -138,4 +138,40 @@ namespace Registers.Classes
             throw new NotSupportedException();
         }
     }
+
+    public class DoubleToPixelGridLengthConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is double d)
+                return new GridLength(d, GridUnitType.Pixel);
+            return new GridLength(100, GridUnitType.Pixel); // fallback
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is GridLength gl && gl.IsAbsolute)
+                return gl.Value;
+            return 100d;
+        }
+    }
+
+    public class IndexToItemConverter : IValueConverter
+    {
+        public object Convert(object value, Type type, object parameter, CultureInfo culture)
+        {
+            string typeOfParameter = parameter.ToString();
+            int ind = int.Parse(typeOfParameter);
+            if(value is IList<Visibility> list && ind is int index && 
+                index < list.Count)
+                return list[index];
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
